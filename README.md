@@ -1,42 +1,62 @@
 # Settlement Desk
 
-Settlement Desk investigates payout discrepancies across a merchant ledger, processor settlement and bank statement. It verifies model findings against source records, keeps ambiguous deposits open, and records reviewer decisions across corrected imports.
+Settlement Desk — система для расследования расхождений в выплатах между учётным реестром продавца, отчётами платёжного процессора и банковской выпиской. Система проверяет выводы модели по первичным данным, оставляет неоднозначные зачисления открытыми для дальнейшего расследования и сохраняет решения аналитика при повторном импорте исправленных данных.
 
-[Four-minute walkthrough](assets/settlement-desk-walkthrough.mp4) · [Case study](docs/case-study.md) · [Structured benchmark](results/benchmarks/benchmark-v2.json) · [Support-thread benchmark](results/benchmarks/support-benchmark.json) · [Import contract](docs/inputs.md)
+[Четырёхминутная демонстрация](assets/settlement-desk-walkthrough.mp4) · [Case Study](docs/case-study.md) · [Структурированный бенчмарк](results/benchmarks/benchmark-v2.json) · [Бенчмарк анализа переписки](results/benchmarks/support-benchmark.json) · [Спецификация импорта](docs/inputs.md)
 
-**Payments knowledge** answers questions about payops procedures and fees from the policy version applicable to a workspace, market and date. It runs Qwen locally, links claims to policy passages, and computes combined fees from source rows in integer cents. [Knowledge RAG case study](docs/knowledge-rag.md) · [Benchmark receipt](results/benchmarks/knowledge-benchmark.json)
+**Payments knowledge** отвечает на вопросы об операционных процедурах и комиссиях, используя версию регламента, применимую к выбранному workspace, рынку и дате. Система запускает Qwen локально, связывает утверждения с соответствующими фрагментами документов и рассчитывает совокупные комиссии на основе исходных тарифных строк, используя целочисленные значения в центах.
 
-![A verified $150 refund finding with source citations and three reconciled amounts](assets/03-finding.png)
+[Case Study по Knowledge RAG](docs/knowledge-rag.md) · [Результаты бенчмарка](results/benchmarks/knowledge-benchmark.json)
 
-## Run the demo
+![Подтверждённое объяснение возврата $150 со ссылками на источники и тремя сверенными суммами](assets/03-finding.png)
 
-Run from the project root with Python 3.11 or later.
+## Запуск демонстрации
+
+Запускайте команды из корневой директории проекта. Требуется Python 3.11 или новее.
 
 ```powershell
 python run.py demo
 ```
 
-Open [the close queue](http://127.0.0.1:8765). The demo runs locally from the bundled model recording. Use **Run investigation** on the payout with a $150 ledger variance. Follow a source link, accept the explanation and return to the queue. Open the payout with an unknown bank variance and request the missing bank trace.
+Откройте [очередь сверки](http://127.0.0.1:8765).
 
-In a second terminal, import the two corrected source bundles. Reload the close queue to see both cases reconcile. Each case links back to the earlier evidence and review decision.
+Демонстрация работает локально с использованием сохранённых ответов модели. Для выплаты с расхождением в реестре на $150 нажмите **Run investigation**. Перейдите по ссылке на первичный источник, подтвердите предложенное объяснение и вернитесь к очереди.
+
+Затем откройте выплату с необъяснённым расхождением в банковских данных и запросите недостающий идентификатор банковской операции.
+
+Во втором терминале импортируйте два пакета исправленных исходных данных. Обновите страницу очереди, чтобы увидеть, что оба случая теперь успешно сверяются. Для каждого случая сохраняются ссылки на ранее полученные доказательства и решение аналитика.
 
 ```powershell
 python run.py import artifacts/workbench/desk-sample-inputs/03-corrected-ledger/manifest.json artifacts/workbench/desk-sample-inputs/04-bank-trace/manifest.json
 ```
 
-To repeat the original workflow, start the demo with a fresh `--db` path. To run deterministic rules on a demo, pass `--mode baseline`.
+Для повторения исходного сценария запустите демонстрацию с новым путём к базе данных через `--db`.
 
-## Run live on the local GPU
+Для запуска детерминированного rule-based baseline используйте `--mode baseline`.
+
+## Запуск с локальной GPU
 
 ```powershell
 pwsh -File scripts/with-model.ps1 -Task demo-live
 ```
 
-The Windows wrapper starts the pinned Ollama runtime and Qwen3 8B Q4_K_M checkpoint from the project cache. The first download is about 7 GB. Allow 15 GiB of workspace disk for the cache and extraction. The live demo uses its own database and prints the corrections paths. Close the terminal session with Ctrl+C to stop the demo and its project model service.
+Windows-скрипт запускает закреплённую версию Ollama и checkpoint Qwen3 8B Q4_K_M из локального кэша проекта.
 
-## Investigate a support thread
+Первоначальная загрузка составляет около 7 ГБ. Для кэширования и распаковки рекомендуется выделить 15 GiB свободного дискового пространства.
 
-Two bank credits can share the same amount while the processor's structured trace is missing. An optional processor support thread may distinguish the credits through a correction, a reply referring to an earlier message, or a note describing another merchant. The local model extracts a candidate and checks the interpretation against the thread. The software checks the matching credit and retains exact source quotes. The finding stays open for a structured reference and analyst follow-up.
+Live-демонстрация использует отдельную базу данных и выводит пути к файлам исправлений.
+
+Для завершения демонстрации и остановки запущенного модельного сервиса нажмите `Ctrl+C` в терминале.
+
+## Анализ переписки с поддержкой
+
+Два банковских зачисления могут иметь одинаковую сумму, тогда как структурированный идентификатор операции от платёжного процессора отсутствует.
+
+Дополнительная переписка с поддержкой процессора может помочь различить эти операции благодаря исправлениям, ответам на предыдущие сообщения или упоминаниям другого продавца.
+
+Локальная LLM извлекает предполагаемую операцию и проверяет интерпретацию по содержимому переписки. Программная логика проверяет соответствующее банковское зачисление и сохраняет точные цитаты из источника.
+
+При этом расследование остаётся открытым до получения структурированного идентификатора и дальнейшей проверки аналитиком.
 
 ```powershell
 pwsh -File scripts/with-model.ps1 -Task demo-support
@@ -44,23 +64,45 @@ pwsh -File scripts/with-model.ps1 -Task benchmark-support
 python run.py support-fixtures
 ```
 
-Run the commands separately. The first starts the support-case demo. In a fresh demo database, [case 1](http://127.0.0.1:8765/cases/1) shows an overnight posting and a cancelled recovery batch. Select **Run investigation** to see the quoted evidence and suggested trace. The benchmark scores both modes against independently specified trace and citation labels. The fixture command exports the importable source bundles.
+Команды необходимо выполнять по отдельности.
 
-## Ask the payments policy library
+Первая команда запускает демонстрацию анализа переписки. В новой демонстрационной базе данных [case 1](http://127.0.0.1:8765/cases/1) показывает зачисление, проведённое ночью, и отменённую пакетную операцию восстановления.
+
+Нажмите **Run investigation**, чтобы просмотреть цитаты из источников и предложенный идентификатор операции.
+
+Бенчмарк оценивает оба режима работы по независимо заданной эталонной разметке идентификаторов операций и цитат.
+
+Команда `support-fixtures` экспортирует пакеты исходных данных, пригодные для последующего импорта.
+
+## Работа с библиотекой платёжных регламентов
 
 ```powershell
 pwsh -File scripts/with-model.ps1 -Task demo-rag
 ```
 
-Open [Payments knowledge](http://127.0.0.1:8765/knowledge), select **Combined dispute fees** and submit. For Atlas Pay · US with policy effective on April 12, 2025 and known on May 3, 2025, the two cited fee rows add to **$22.56**. Change **Known on** to May 25, 2025 and submit again to see the retroactive correction and **$23.62**. Open either citation to inspect its exact passage, dates and document digest.
+Откройте [Payments knowledge](http://127.0.0.1:8765), выберите **Combined dispute fees** и отправьте запрос.
 
-![Live policy answer showing the $22.56 combined fee and the two source rows](assets/knowledge-fees.png)
+Для Atlas Pay · US при регламенте, действующем на 12 апреля 2025 года и известном системе на 3 мая 2025 года, сумма двух комиссий из цитируемых тарифных строк составляет **$22.56**.
 
-The knowledge demo adds the pinned 639 MB Qwen3 Embedding checkpoint to the local cache. `python run.py demo` also serves the same library with offline keyword search. To use your own versioned synthetic library, pass `-KnowledgeCorpus <path>` to the live wrapper or `--knowledge-corpus <path>` to `python run.py serve`. [JSONL import contract](docs/policy-library.md)
+Измените параметр **Known on** на 25 мая 2025 года и отправьте запрос повторно, чтобы увидеть ретроактивную корректировку и новую сумму **$23.62**.
 
-## Import other synthetic data
+Откройте любую цитату, чтобы проверить точный фрагмент документа, даты и digest документа.
 
-Use [the CSV and manifest contract](docs/inputs.md) to create one bundle per payout snapshot. Use a fresh local database for a new close.
+![Ответ системы с расчётом совокупной комиссии $22.56 и двумя исходными тарифными строками](assets/knowledge-fees.png)
+
+Демонстрация Knowledge RAG дополнительно загружает закреплённый checkpoint Qwen3 Embedding размером 639 MB в локальный кэш.
+
+Команда `python run.py demo` также предоставляет доступ к этой библиотеке, используя офлайн-поиск по ключевым словам.
+
+Для использования собственной версионируемой синтетической библиотеки передайте `-KnowledgeCorpus <path>` в live-скрипт или `--knowledge-corpus <path>` при запуске `python run.py serve`.
+
+[Спецификация импорта JSONL](docs/policy-library.md)
+
+## Импорт других синтетических данных
+
+Используйте [спецификацию CSV и manifest](docs/inputs.md), чтобы создать отдельный пакет данных для каждого снимка состояния выплат.
+
+Для новой процедуры сверки используйте отдельную локальную базу данных.
 
 ```powershell
 python run.py import some-folder/manifest.json --db artifacts/my-close.db
@@ -68,9 +110,13 @@ python run.py list --db artifacts/my-close.db
 python run.py serve --db artifacts/my-close.db
 ```
 
-`serve` uses the rules-only mode by default. When the pinned service is already running on port 11439, `serve --mode live` uses the model. The server binds to loopback and is designed for one analyst and synthetic data.
+По умолчанию команда `serve` запускает режим, использующий только детерминированные правила.
 
-## Verify the release
+Если закреплённый модельный сервис уже работает на порту `11439`, команда `serve --mode live` позволяет использовать LLM.
+
+Сервер принимает соединения только через loopback и предназначен для работы одного аналитика с синтетическими данными.
+
+## Проверка релиза
 
 ```powershell
 python run.py check
@@ -82,19 +128,39 @@ pwsh -File scripts/with-model.ps1 -Task release
 python run.py package
 ```
 
-The benchmark pairs each frozen input with a rules-only result and a live-model result. It resumes checkpoints when model, data and implementation digests match. The release command also probes the GPU, validates the benchmark receipts, and starts the demo from a clean temporary source copy. Packaging writes `artifacts/Settlement-Desk.zip` with the source, replay, walkthrough and release evidence. The pinned model runtime and raw local run receipts live under `.runtime/` and `artifacts/`.
+Бенчмарк сопоставляет каждый зафиксированный набор входных данных с результатами rule-based baseline и live-модели.
 
-The included walkthrough uses desktop and mobile Edge captures. To regenerate it, run `python run.py walkthrough` with Edge, Node.js 22 or later, and FFmpeg available. On Windows, the renderer can also use the SHA-256-pinned imageio-ffmpeg 0.6.0 wheel placed in `.runtime/ffmpeg-wheel.whl`. [Pinned Windows wheel](https://pypi.org/project/imageio-ffmpeg/0.6.0/#imageio_ffmpeg-0.6.0-py3-none-win_amd64.whl)
+Система поддерживает возобновление выполнения с checkpoints при совпадении контрольных digest модели, данных и реализации.
 
-## Repository layout
+Команда `release` дополнительно проверяет доступность GPU, валидирует сохранённые результаты бенчмарков и запускает демонстрацию из чистой временной копии исходного кода.
 
-- `settlement/` — reconciliation engine, AI integration, storage, and web UI.
-- `evaluation/` — datasets, evaluators, synthetic cases, and benchmark runners.
-- `scripts/` — model startup, demos, and release utilities.
-- `config/` — pinned model configurations.
-- `results/` — published benchmark reports and recorded demo responses.
-- `assets/` — screenshots and walkthrough video.
-- `docs/` — case studies, input specification, and [benchmark provenance](docs/benchmark-provenance.md).
-- `tests/` — automated tests.
+Команда `package` создаёт архив `artifacts/Settlement-Desk.zip`, включающий исходный код, данные для воспроизведения, демонстрационное видео и материалы проверки релиза.
 
-Published benchmark fingerprints refer to their historical source versions; see [provenance](docs/benchmark-provenance.md).
+Закреплённая среда выполнения модели и исходные локальные результаты запусков хранятся в `.runtime/` и `artifacts/`.
+
+Демонстрационное видео создано на основе записей Microsoft Edge в desktop- и mobile-режимах.
+
+Для повторной генерации видео выполните:
+
+```powershell
+python run.py walkthrough
+```
+
+Для этого необходимы Microsoft Edge, Node.js версии 22 или новее и FFmpeg.
+
+В Windows рендерер также может использовать wheel-пакет `imageio-ffmpeg 0.6.0`, закреплённый по SHA-256 и размещённый по пути `.runtime/ffmpeg-wheel.whl`.
+
+[Закреплённый Windows wheel](https://pypi.org/project/imageio-ffmpeg/0.6.0/#imageio_ffmpeg-0.6.0-py3-none-win_amd64.whl)
+
+## Структура репозитория
+
+- `settlement/` — движок сверки, AI-интеграция, хранение данных и web UI.
+- `evaluation/` — датасеты, средства оценки, синтетические сценарии и скрипты запуска бенчмарков.
+- `scripts/` — запуск моделей, демонстрационные сценарии и утилиты подготовки релиза.
+- `config/` — закреплённые конфигурации моделей.
+- `results/` — опубликованные отчёты бенчмарков и сохранённые ответы моделей для демонстраций.
+- `assets/` — скриншоты и демонстрационное видео.
+- `docs/` — case studies, спецификации входных данных и [происхождение результатов бенчмарков](docs/benchmark-provenance.md).
+- `tests/` — автоматизированные тесты.
+
+Контрольные отпечатки опубликованных бенчмарков соответствуют историческим версиям исходного кода. Подробности приведены в [документации о происхождении результатов](docs/benchmark-provenance.md).
