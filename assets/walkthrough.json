@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "duration_seconds": 240,
+  "simulated_reviews": [
+    {
+      "actor": "simulated reviewer",
+      "action": "accept",
+      "completed_snapshot": 3
+    },
+    {
+      "actor": "simulated reviewer",
+      "action": "request",
+      "completed_snapshot": 4
+    }
+  ],
+  "scripted_browser_seconds": 12.119,
+  "assets": {
+    "01-queue.png": "b6b5dad72b5b9f518fd5a71e58419952603037dc4a3745d4e52831b8abdda0a3",
+    "03-finding.png": "82fd570b373fc007c612d0da34a4993d67d17bdf770619a16f4c69b1a1301445",
+    "06-ambiguous.png": "2fd3bf16488f9e58b6b9e8fd3a7b96810e23070efbff02ef639ad73af5c2cc15",
+    "08-history.png": "940a5861c50c7ec871aad035751f0d9b83115f3a1d932f9d6dace1c9df8f0ecc",
+    "09-mobile.png": "a0e1fe707fafa14eb45b0ac539c35737cfcecaf0ef9dc413a341851634199553",
+    "settlement-desk-walkthrough.mp4": "40654b015f8bcf58a0aa0dbd15c90f0452462cc41234bb7d438c58e66fddd429"
+  }
+}

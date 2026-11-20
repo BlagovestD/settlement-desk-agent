@@ -1,0 +1,291 @@
+{
+  "command": "benchmark-rag",
+  "finished_utc": "2026-11-19T18:37:20.519128+00:00",
+  "harness_sha256": "aa16627fa3af04254c0a980deaabd4119952d1521de9041fa20d1dc333296db9",
+  "passed": true,
+  "development": false,
+  "questions_sha256": "f0cdd5fd8ab43f63a3b0e190ad933bfc67ee3fef5967179a0b08041450290feb",
+  "corpus_sha256": "d2f3cdbc92e421175880dad6ca93e5ce707cec7f529263465d1a244654933025",
+  "knowledge_implementation_sha256": "d6ae145ba8df18c7e3b540e0aed9b2ebb202e3af20baf51f495dd4a5cc2c3d4a",
+  "documents": 720,
+  "passages": 4176,
+  "distinct_embedding_inputs": 67,
+  "scope_pairs": 18,
+  "top_k": 8,
+  "questions": 98,
+  "unique_questions": 67,
+  "answerable": 80,
+  "unanswerable": 18,
+  "gold_passages": 105,
+  "fee_totals": 21,
+  "generator": "qwen3:8b-q4_K_M",
+  "generator_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "embedding_model": "qwen3-embedding:0.6b",
+  "embedding_digest": "ac6da0dfba84a81fdbfbaf330198c33cd77c4cdfc53e8bc50eb581914a15621d",
+  "ollama_version": "0.40.16",
+  "model_gpu_resident_bytes": {
+    "qwen3:8b-q4_K_M": 5586592726,
+    "qwen3-embedding:0.6b": 985588039
+  },
+  "methods": {
+    "lexical": {
+      "scope_violations": 0,
+      "gold_passages_found": 98,
+      "complete_evidence": 73
+    },
+    "dense": {
+      "scope_violations": 0,
+      "gold_passages_found": 105,
+      "complete_evidence": 80,
+      "correct": 90,
+      "correct_answerable": 78,
+      "correct_abstentions": 12,
+      "incorrect_answers": 7,
+      "invalid_outputs": 0,
+      "exact_fee_totals": 21,
+      "citation_scope_violations": 0
+    },
+    "hybrid": {
+      "scope_violations": 0,
+      "gold_passages_found": 105,
+      "complete_evidence": 80,
+      "correct": 88,
+      "correct_answerable": 76,
+      "correct_abstentions": 12,
+      "incorrect_answers": 10,
+      "invalid_outputs": 0,
+      "exact_fee_totals": 21,
+      "citation_scope_violations": 0
+    }
+  },
+  "all_rankings_ms": {
+    "median": 54.06,
+    "p95": 67.67
+  },
+  "generation_and_verification_ms": {
+    "dense": {
+      "median": 760.96,
+      "p95": 893.46
+    },
+    "hybrid": {
+      "median": 779.02,
+      "p95": 928.42
+    }
+  },
+  "hybrid_end_to_end_ms": {
+    "median": 834.08,
+    "p95": 982.59
+  },
+  "examples": {
+    "fee_calculation": {
+      "id": "042",
+      "category": "question",
+      "question": "What is the combined fee to open a card dispute and prepare a representment packet?",
+      "scope": {
+        "workspace": "meridian-pay",
+        "market": "ca",
+        "effective_on": "2025-09-12",
+        "known_on": "2025-08-12"
+      },
+      "expected_edition": "v4",
+      "citations": [
+        "meridian-pay/ca/fee-schedule/v4#card-filing",
+        "meridian-pay/ca/fee-schedule/v4#card-packet"
+      ],
+      "total_cents": 3400,
+      "retrieval_ms": 45.85,
+      "runs": {
+        "lexical": {
+          "retrieved": [
+            "meridian-pay/ca/fee-schedule/v4#card-packet",
+            "meridian-pay/ca/fee-schedule/v4#card-filing",
+            "meridian-pay/ca/fee-schedule/v4#card-withdrawal",
+            "meridian-pay/ca/card-disputes/v4#issuer-window",
+            "meridian-pay/ca/fee-schedule/v4#card-escalation",
+            "meridian-pay/ca/data-controls/v4#retention",
+            "meridian-pay/ca/card-disputes/v4#deadline",
+            "meridian-pay/ca/card-disputes/v4#digital"
+          ]
+        },
+        "dense": {
+          "retrieved": [
+            "meridian-pay/ca/fee-schedule/v4#card-packet",
+            "meridian-pay/ca/fee-schedule/v4#card-filing",
+            "meridian-pay/ca/fee-schedule/v4#card-escalation",
+            "meridian-pay/ca/fee-schedule/v4#card-withdrawal",
+            "meridian-pay/ca/card-disputes/v4#issuer-window",
+            "meridian-pay/ca/data-controls/v4#retention",
+            "meridian-pay/ca/card-disputes/v4#deadline",
+            "meridian-pay/ca/fee-schedule/v4#statement"
+          ],
+          "status": "answered",
+          "correct": true,
+          "invalid_output": false,
+          "total_cents": 3400,
+          "citations": [
+            "meridian-pay/ca/fee-schedule/v4#card-filing",
+            "meridian-pay/ca/fee-schedule/v4#card-packet"
+          ],
+          "generation_ms": 873.13
+        },
+        "hybrid": {
+          "retrieved": [
+            "meridian-pay/ca/fee-schedule/v4#card-packet",
+            "meridian-pay/ca/fee-schedule/v4#card-filing",
+            "meridian-pay/ca/fee-schedule/v4#card-withdrawal",
+            "meridian-pay/ca/fee-schedule/v4#card-escalation",
+            "meridian-pay/ca/card-disputes/v4#issuer-window",
+            "meridian-pay/ca/data-controls/v4#retention",
+            "meridian-pay/ca/card-disputes/v4#deadline",
+            "meridian-pay/ca/card-disputes/v4#digital"
+          ],
+          "status": "answered",
+          "correct": true,
+          "invalid_output": false,
+          "total_cents": 3400,
+          "citations": [
+            "meridian-pay/ca/fee-schedule/v4#card-filing",
+            "meridian-pay/ca/fee-schedule/v4#card-packet"
+          ],
+          "generation_ms": 803.25
+        }
+      }
+    },
+    "hybrid_recovers_evidence": null,
+    "unanswerable": {
+      "id": "054",
+      "category": "question",
+      "question": "When does Saturday's automatic payout submission window close?",
+      "scope": {
+        "workspace": "velora-pay",
+        "market": "gb",
+        "effective_on": "2025-01-20",
+        "known_on": "2025-01-22"
+      },
+      "expected_edition": "v1",
+      "citations": [],
+      "total_cents": null,
+      "retrieval_ms": 67.03,
+      "runs": {
+        "lexical": {
+          "retrieved": [
+            "velora-pay/gb/bank-posting/v1#payout-cutoff",
+            "velora-pay/gb/payout-reserves/v1#reserve",
+            "velora-pay/gb/reconciliation/v1#timezone",
+            "velora-pay/gb/bank-posting/v1#late",
+            "velora-pay/gb/card-disputes/v1#issuer-window",
+            "velora-pay/gb/fee-schedule/v1#bank-trace",
+            "velora-pay/gb/refund-handling/v1#refund-cutoff",
+            "velora-pay/gb/bank-posting/v1#reversal"
+          ]
+        },
+        "dense": {
+          "retrieved": [
+            "velora-pay/gb/bank-posting/v1#payout-cutoff",
+            "velora-pay/gb/bank-posting/v1#late",
+            "velora-pay/gb/fee-schedule/v1#bank-stop",
+            "velora-pay/gb/payout-reserves/v1#refund-spike",
+            "velora-pay/gb/fee-schedule/v1#history",
+            "velora-pay/gb/reconciliation/v1#coverage",
+            "velora-pay/gb/refund-handling/v1#refund-cutoff",
+            "velora-pay/gb/fee-schedule/v1#bank-retry"
+          ],
+          "status": "abstained",
+          "correct": true,
+          "invalid_output": false,
+          "total_cents": null,
+          "citations": [],
+          "generation_ms": 805.73
+        },
+        "hybrid": {
+          "retrieved": [
+            "velora-pay/gb/bank-posting/v1#payout-cutoff",
+            "velora-pay/gb/bank-posting/v1#late",
+            "velora-pay/gb/payout-reserves/v1#reserve",
+            "velora-pay/gb/refund-handling/v1#refund-cutoff",
+            "velora-pay/gb/fee-schedule/v1#bank-stop",
+            "velora-pay/gb/reconciliation/v1#coverage",
+            "velora-pay/gb/card-disputes/v1#issuer-window",
+            "velora-pay/gb/reconciliation/v1#timezone"
+          ],
+          "status": "abstained",
+          "correct": true,
+          "invalid_output": false,
+          "total_cents": null,
+          "citations": [],
+          "generation_ms": 742.94
+        }
+      }
+    },
+    "hybrid_miss": {
+      "id": "049",
+      "category": "question",
+      "question": "Which ID should we get for two equal bank credits, and what is the fee for obtaining it?",
+      "scope": {
+        "workspace": "atlas-pay",
+        "market": "us",
+        "effective_on": "2025-04-12",
+        "known_on": "2025-05-25"
+      },
+      "expected_edition": "v3",
+      "citations": [
+        "atlas-pay/us/bank-posting/v3#trace",
+        "atlas-pay/us/fee-schedule/v3#bank-trace"
+      ],
+      "total_cents": null,
+      "retrieval_ms": 57.8,
+      "runs": {
+        "lexical": {
+          "retrieved": [
+            "atlas-pay/us/bank-posting/v3#trace",
+            "atlas-pay/us/fee-schedule/v3#bank-trace",
+            "atlas-pay/us/invoice-controls/v3#debit",
+            "atlas-pay/us/fee-schedule/v3#statement",
+            "atlas-pay/us/fee-schedule/v3#bank-retry",
+            "atlas-pay/us/card-disputes/v3#deadline",
+            "atlas-pay/us/payout-reserves/v3#returns",
+            "atlas-pay/us/bank-posting/v3#late"
+          ]
+        },
+        "dense": {
+          "retrieved": [
+            "atlas-pay/us/fee-schedule/v3#statement",
+            "atlas-pay/us/bank-posting/v3#trace",
+            "atlas-pay/us/bank-change/v3#verify-bank",
+            "atlas-pay/us/fee-schedule/v3#card-withdrawal",
+            "atlas-pay/us/invoice-controls/v3#breakdown",
+            "atlas-pay/us/fee-schedule/v3#bank-trace",
+            "atlas-pay/us/fee-schedule/v3#bank-stop",
+            "atlas-pay/us/fee-schedule/v3#ach-return"
+          ],
+          "status": "abstained",
+          "correct": false,
+          "invalid_output": false,
+          "total_cents": null,
+          "citations": [],
+          "generation_ms": 637.17
+        },
+        "hybrid": {
+          "retrieved": [
+            "atlas-pay/us/bank-posting/v3#trace",
+            "atlas-pay/us/fee-schedule/v3#statement",
+            "atlas-pay/us/fee-schedule/v3#bank-trace",
+            "atlas-pay/us/invoice-controls/v3#breakdown",
+            "atlas-pay/us/fee-schedule/v3#bank-retry",
+            "atlas-pay/us/fee-schedule/v3#card-withdrawal",
+            "atlas-pay/us/fee-schedule/v3#bank-stop",
+            "atlas-pay/us/fee-schedule/v3#ach-retry"
+          ],
+          "status": "answered",
+          "correct": false,
+          "invalid_output": false,
+          "total_cents": null,
+          "citations": [
+            "atlas-pay/us/fee-schedule/v3#bank-trace"
+          ],
+          "generation_ms": 879.17
+        }
+      }
+    }
+  }
+}

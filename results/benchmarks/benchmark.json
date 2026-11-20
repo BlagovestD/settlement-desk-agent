@@ -1,0 +1,95 @@
+{
+  "configuration": {
+    "implementation": {
+      "harness/benchmark.py": "da3be824bf3ee3066ec67b9710e37a33cf8d7538d28f300078be4dc3575814ee",
+      "harness/datasets.py": "827f2d89c43cc461582c0f5f8d89bd0ff350c8abb54670a5d69c0c577fb90714",
+      "harness/fixtures.py": "b285ae6601f8129419a0426ace1a7f5ed96da9dfb6d2230d076b086248fbcc33",
+      "harness/model-lock.json": "ae22387c16b992021c90efc21292f3489062f3b61c7da65a9f0d08311fcf134f",
+      "harness/model.py": "f8bed4e3fbffa1ac7290b63fa89c2b9174f8d3b354c80e49cf6fac6b9f2df0fe",
+      "settlement/agent.py": "60394337b2649d2f73ee1d6df99a4b490ab61b632ca33e8780f2a0125fc509e3",
+      "settlement/analysis.py": "6bdb62243dc4b1acec4c9acd964f29bddfe79b6ce61a4516dcc31a6a258db399",
+      "settlement/reconcile.py": "935333b9512c4617739765643e842ea5a09bac2ac94a282a30d81dd98d8f2a85",
+      "settlement/service.py": "a1280a8ba417551b5d07152b6bdfe9eb36b08465c270f60da838ba757953cd72",
+      "settlement/storage.py": "add6c5bcf810b2c990882aa3c43f4dc68e23875515a8cc9fe54a0070ff6147ac"
+    },
+    "dataset_sha256": "84000fe72da9866cd9c57950ac0c571c25bcab228e0ad1b181d8132aa678d1ea",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "runtime": "0.40.16",
+    "context": 4096
+  },
+  "run_key": "b671c71cb072a1fa3776a44bc2cd20c2c3851e49a24b1e3d334d5cc0d5d74811",
+  "finished_utc": "2026-11-19T16:37:54.869336+00:00",
+  "counts": {
+    "resolvable": {
+      "cases": 66,
+      "baseline": 66,
+      "live": 0
+    },
+    "underdetermined": {
+      "cases": 48,
+      "baseline": 48,
+      "live": 0
+    },
+    "clean": {
+      "cases": 18,
+      "baseline": 18,
+      "live": 18
+    }
+  },
+  "false_resolutions": 0,
+  "gpu": {
+    "runtime_version": "0.40.16",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "context": 4096,
+    "gpu_resident_bytes": 5586592726,
+    "elapsed_seconds": 8.111,
+    "generated_tokens": 44,
+    "tool_round_trip": true
+  },
+  "sampled_device_peak_mib_this_invocation": 6612,
+  "median_seconds": 2.2603,
+  "p95_seconds": 2.3243,
+  "tokens": {
+    "input_tokens": 158372,
+    "output_tokens": 15902
+  },
+  "repeated": {
+    "additional_runs": 24,
+    "correct": 4
+  },
+  "by_scenario": {
+    "ambiguous": {
+      "baseline": 20,
+      "live": 0
+    },
+    "amount": {
+      "baseline": 12,
+      "live": 0
+    },
+    "clean": {
+      "baseline": 18,
+      "live": 18
+    },
+    "compound": {
+      "baseline": 10,
+      "live": 0
+    },
+    "fee": {
+      "baseline": 18,
+      "live": 0
+    },
+    "late": {
+      "baseline": 18,
+      "live": 0
+    },
+    "offset": {
+      "baseline": 16,
+      "live": 0
+    },
+    "refund": {
+      "baseline": 20,
+      "live": 0
+    }
+  },
+  "api_charges_usd": 0
+}

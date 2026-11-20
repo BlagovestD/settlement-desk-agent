@@ -1,0 +1,111 @@
+{
+  "model": {
+    "runtime_version": "0.40.16",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "context": 4096,
+    "gpu_resident_bytes": 5586592726,
+    "elapsed_seconds": 0.88,
+    "generated_tokens": 44,
+    "tool_round_trip": true
+  },
+  "recordings": {
+    "[{\"account\":\"demo-merchant\",\"bank_credit\":985000,\"case\":\"case_0b12ae6ead581e57\",\"changed_lines\":1,\"component_net\":985000,\"coverage\":{\"bank\":true,\"merchant\":true,\"processor\":true},\"cutoff\":\"2026-01-16T00:00:00Z\",\"differences\":{\"bank\":0,\"merchant\":-15000,\"processor\":0},\"merchant_net\":1000000,\"payout\":985000},{\"differences\":[{\"changed_fields\":[\"missing_merchant\"],\"event\":\"re_58e00e8c64beb012\",\"merchant\":null,\"net_difference_cents\":-15000,\"processor\":{\"charge_id\":\"ch_331241a982f11ec0\",\"fee\":0,\"gross\":-15000,\"id\":\"re_58e00e8c64beb012\",\"kind\":\"refund\"}}],\"merchant_complete\":true,\"processor_complete\":true,\"receipts\":[{\"cents\":-15000,\"charge_id\":\"ch_331241a982f11ec0\",\"id\":\"receipt_877994afff2f6504\",\"refund_id\":\"re_58e00e8c64beb012\"}],\"referenced_charges\":[{\"fee\":3000,\"gross\":1003000,\"id\":\"ch_331241a982f11ec0\",\"kind\":\"charge\"}]},{\"bank_complete\":true,\"candidates\":[{\"cents\":985000,\"id\":\"bank_95af4c654a13d22e\",\"posted_at\":\"2026-01-16T00:00:00Z\",\"trace\":\"trace_1ee57012853d452f\"}],\"claimed_elsewhere\":[],\"payout_id\":\"po_e539a78bc8eff346\",\"payout_trace\":\"trace_1ee57012853d452f\",\"watermark\":\"2026-01-16T00:00:00Z\"}]": [
+      {
+        "model": "qwen3:8b-q4_K_M",
+        "created_at": "2026-11-19T16:43:32.2637994Z",
+        "message": {
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "call_0xu39rn8",
+              "function": {
+                "index": 0,
+                "name": "ledger_evidence",
+                "arguments": {
+                  "case_id": "case_0b12ae6ead581e57",
+                  "cutoff": "2026-01-16T00:00:00Z"
+                }
+              }
+            }
+          ]
+        },
+        "done": true,
+        "done_reason": "stop",
+        "total_duration": 921011500,
+        "load_duration": 3357800,
+        "prompt_eval_count": 361,
+        "prompt_eval_cached_count": 284,
+        "prompt_eval_duration": 33865000,
+        "eval_count": 62,
+        "eval_duration": 858907000
+      },
+      {
+        "model": "qwen3:8b-q4_K_M",
+        "created_at": "2026-11-19T16:43:33.578884Z",
+        "message": {
+          "role": "assistant",
+          "content": "{\n  \"reason\": \"missing_ledger_refund\",\n  \"evidence_ids\": [\n    \"re_58e00e8c64beb012\",\n    \"ch_331241a982f11ec0\",\n    \"receipt_877994afff2f6504\"\n  ]\n}"
+        },
+        "done": true,
+        "done_reason": "stop",
+        "total_duration": 1262486500,
+        "load_duration": 2909900,
+        "prompt_eval_count": 571,
+        "prompt_eval_cached_count": 141,
+        "prompt_eval_duration": 125513000,
+        "eval_count": 81,
+        "eval_duration": 1106299000
+      }
+    ],
+    "[{\"account\":\"demo-merchant\",\"bank_credit\":null,\"case\":\"case_b9096a04e7d80068\",\"changed_lines\":0,\"component_net\":985000,\"coverage\":{\"bank\":true,\"merchant\":true,\"processor\":true},\"cutoff\":\"2026-01-16T00:00:00Z\",\"differences\":{\"bank\":null,\"merchant\":0,\"processor\":0},\"merchant_net\":985000,\"payout\":985000},{\"differences\":[],\"merchant_complete\":true,\"processor_complete\":true,\"receipts\":[],\"referenced_charges\":[]},{\"bank_complete\":true,\"candidates\":[{\"cents\":985000,\"id\":\"bank_53d23c0bdf43efb2\",\"posted_at\":\"2026-01-16T00:00:00Z\",\"trace\":null},{\"cents\":985000,\"id\":\"bank_19fcfc64e7aa8576\",\"posted_at\":\"2026-01-16T00:00:00Z\",\"trace\":null}],\"claimed_elsewhere\":[],\"payout_id\":\"po_c963cfe0afae5a3b\",\"payout_trace\":\"trace_e1454c40c439f34a\",\"watermark\":\"2026-01-16T00:00:00Z\"}]": [
+      {
+        "model": "qwen3:8b-q4_K_M",
+        "created_at": "2026-11-19T16:43:34.633768Z",
+        "message": {
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "call_out6087v",
+              "function": {
+                "index": 0,
+                "name": "bank_evidence",
+                "arguments": {
+                  "cutoff": "2026-01-16T00:00:00Z",
+                  "case_id": "case_b9096a04e7d80068"
+                }
+              }
+            }
+          ]
+        },
+        "done": true,
+        "done_reason": "stop",
+        "total_duration": 954838500,
+        "load_duration": 3236900,
+        "prompt_eval_count": 332,
+        "prompt_eval_cached_count": 256,
+        "prompt_eval_duration": 33997000,
+        "eval_count": 64,
+        "eval_duration": 868130000
+      },
+      {
+        "model": "qwen3:8b-q4_K_M",
+        "created_at": "2026-11-19T16:43:35.5434483Z",
+        "message": {
+          "role": "assistant",
+          "content": "{\n  \"reason\": \"request_bank_trace\",\n  \"evidence_ids\": [\"bank_53d23c0bdf43efb2\", \"bank_19fcfc64e7aa8576\"]\n}"
+        },
+        "done": true,
+        "done_reason": "stop",
+        "total_duration": 858095900,
+        "load_duration": 3306700,
+        "prompt_eval_count": 495,
+        "prompt_eval_cached_count": 114,
+        "prompt_eval_duration": 104763000,
+        "eval_count": 53,
+        "eval_duration": 724619000
+      }
+    ]
+  }
+}

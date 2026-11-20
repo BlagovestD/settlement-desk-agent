@@ -1,0 +1,9 @@
+{
+  "runtime_version": "0.40.16",
+  "windows_archive_url": "https://github.com/ollama/ollama/releases/download/v0.40.16/ollama-windows-amd64.zip",
+  "windows_archive_sha256": "50fcf5ad54277f2fa5d173ebfc93bcb017adbc0c9ef2314daabc96ca9e6aa64e",
+  "model": "qwen3:8b-q4_K_M",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "context": 4096,
+  "port": 11439
+}

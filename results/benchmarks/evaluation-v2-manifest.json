@@ -1,0 +1,16 @@
+{
+  "dataset_sha256": "70346881fd851ae7d0487213f689653594ee227acd5d9dc71391ae2ee1698b09",
+  "cases": 132,
+  "composition": {
+    "clean": 18,
+    "amount": 12,
+    "offset": 16,
+    "compound": 10,
+    "late": 18,
+    "ambiguous": 20,
+    "fee": 18,
+    "refund": 20
+  },
+  "repetitions": 3,
+  "repeat_cases": 12
+}

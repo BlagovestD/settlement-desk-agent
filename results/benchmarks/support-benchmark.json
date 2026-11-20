@@ -1,0 +1,1839 @@
+{
+  "passed": true,
+  "cases": 11,
+  "resolvable": 8,
+  "ambiguous": 3,
+  "counts": {
+    "baseline": {
+      "correct": 5,
+      "correct_proposals": 2,
+      "safe_abstentions": 3,
+      "wrong_proposals": 0,
+      "median_seconds": 0.0227
+    },
+    "live": {
+      "correct": 9,
+      "correct_proposals": 6,
+      "safe_abstentions": 3,
+      "wrong_proposals": 0,
+      "median_seconds": 2.9283
+    }
+  },
+  "configuration": {
+    "implementation": {
+      "harness/benchmark.py": "e4eb25a1b6dd4a1005201e08f226c3d3661228cbd94d72205461ca1f813f6add",
+      "harness/datasets.py": "f256dceb7d6e623639b5e555dacd72a699a889a8825ccb232567dc240a39d8d7",
+      "harness/fixtures.py": "b285ae6601f8129419a0426ace1a7f5ed96da9dfb6d2230d076b086248fbcc33",
+      "harness/model-lock.json": "ae22387c16b992021c90efc21292f3489062f3b61c7da65a9f0d08311fcf134f",
+      "harness/model.py": "f8bed4e3fbffa1ac7290b63fa89c2b9174f8d3b354c80e49cf6fac6b9f2df0fe",
+      "settlement/agent.py": "2f7e701fc6cbcd1e4ae86bd00ac558284a83450cbc0545092526eb409ed1b77b",
+      "settlement/analysis.py": "d8c8322ee3a2e8f00e739faabeafe46ec92a1bab15d139256600973c11ab1ddb",
+      "settlement/reconcile.py": "935333b9512c4617739765643e842ea5a09bac2ac94a282a30d81dd98d8f2a85",
+      "settlement/service.py": "36e3898c03a9c49889d6c897b4e0d37e20a675b6fd5395204a5ee288c8af99ec",
+      "settlement/storage.py": "c49734bd5302c2e3193af6f1f0b5f4c618acde918008530d5738d3c26dc412f5",
+      "settlement/support.py": "f1d17476b4b41ad224ef185d47e3329dc5429499eab94fb1ed0bf26e21de891c",
+      "harness/support_cases.py": "a12508c82c8455095bec91301d519c9015998af983f95dc5c65b905143c805fa",
+      "harness/support_benchmark.py": "dcba1b568fa78a68450e56e01b8ea5216fe33230f6df029b6631b0bb9ece1f93"
+    },
+    "dataset_sha256": "b792f8cd1f07fd6520a6e71ec7cad9de4f003254deb97948778e5dc61aef0a82",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "runtime": "0.40.16",
+    "context": 4096
+  },
+  "run_key": "688d7211062fbbae1ef7a0a9de88e86fbb1c87629f5cc47427fe4335cc67709a",
+  "gpu": {
+    "runtime_version": "0.40.16",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "context": 4096,
+    "gpu_resident_bytes": 5586592726,
+    "elapsed_seconds": 4.311,
+    "generated_tokens": 44,
+    "tool_round_trip": true
+  },
+  "run_at": "2026-11-19T17:33:39.594970+00:00",
+  "rows": [
+    {
+      "case_id": "case_f610b660e4fb58b3",
+      "scenario": "correction_reinstates_original",
+      "expected": {
+        "candidate_id": "bank_442e5bee5c534eac",
+        "trace": "TR140716",
+        "required_notes": [
+          "note_7d8a0548",
+          "note_58ee98c9"
+        ]
+      },
+      "baseline": {
+        "finding": {
+          "reason": "request_bank_trace",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_442e5bee5c534eac",
+            "bank_9a44ceaf03b0d5f1"
+          ],
+          "residual_cents": null,
+          "next_action": "Obtain a trace reference that identifies the bank credit."
+        },
+        "outcome": "rules",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "elapsed_seconds": 0.023,
+        "mode": "baseline",
+        "correct": false,
+        "steps": [
+          {
+            "result": {
+              "differences": [],
+              "merchant_complete": true,
+              "processor_complete": true,
+              "receipts": [],
+              "referenced_charges": []
+            },
+            "tool": "ledger_evidence"
+          },
+          {
+            "result": {
+              "bank_complete": true,
+              "candidates": [
+                {
+                  "cents": 953571,
+                  "id": "bank_442e5bee5c534eac",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR140716"
+                },
+                {
+                  "cents": 953571,
+                  "id": "bank_9a44ceaf03b0d5f1",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR279340"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "payout_id": "po_09f0cbfdec4b9df4",
+              "payout_trace": null,
+              "support_notes": [
+                {
+                  "id": "note_7d8a0548",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "The overnight batch lists TR140716 for the storefront payout. Recovery batch TR279340 has the same amount."
+                },
+                {
+                  "id": "note_33edbdaf",
+                  "posted_at": "2026-01-15T20:01:00Z",
+                  "text": "We may have to use the recovery batch if the overnight run failed."
+                },
+                {
+                  "id": "note_58ee98c9",
+                  "posted_at": "2026-01-15T20:02:00Z",
+                  "text": "Reconciliation confirms the overnight run posted. Recovery was called off before it went to the bank."
+                }
+              ],
+              "watermark": "2026-01-16T00:00:00Z"
+            },
+            "tool": "bank_evidence"
+          }
+        ]
+      },
+      "live": {
+        "finding": {
+          "reason": "support_trace_proposal",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_442e5bee5c534eac",
+            "note_58ee98c9",
+            "note_7d8a0548"
+          ],
+          "residual_cents": null,
+          "next_action": "Review the support notes and request a structured processor reference before reconciling.",
+          "proposal": {
+            "trace": "TR140716",
+            "candidate_id": "bank_442e5bee5c534eac",
+            "citations": [
+              {
+                "note_id": "note_7d8a0548",
+                "quote": "The overnight batch lists TR140716 for the storefront payout. Recovery batch TR279340 has the same amount."
+              },
+              {
+                "note_id": "note_58ee98c9",
+                "quote": "Reconciliation confirms the overnight run posted. Recovery was called off before it went to the bank."
+              }
+            ]
+          }
+        },
+        "outcome": "grounded_proposal",
+        "input_tokens": 1360,
+        "output_tokens": 182,
+        "elapsed_seconds": 3.0877,
+        "mode": "live",
+        "correct": true,
+        "steps": [
+          {
+            "arguments": {
+              "case_id": "case_f610b660e4fb58b3",
+              "cutoff": "2026-01-16T00:00:00Z"
+            },
+            "result": {
+              "candidates": [
+                {
+                  "cents": 953571,
+                  "id": "bank_442e5bee5c534eac",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR140716"
+                },
+                {
+                  "cents": 953571,
+                  "id": "bank_9a44ceaf03b0d5f1",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR279340"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "notes": [
+                {
+                  "id": "note_7d8a0548",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "The overnight batch lists TR140716 for the storefront payout. Recovery batch TR279340 has the same amount."
+                },
+                {
+                  "id": "note_33edbdaf",
+                  "posted_at": "2026-01-15T20:01:00Z",
+                  "text": "We may have to use the recovery batch if the overnight run failed."
+                },
+                {
+                  "id": "note_58ee98c9",
+                  "posted_at": "2026-01-15T20:02:00Z",
+                  "text": "Reconciliation confirms the overnight run posted. Recovery was called off before it went to the bank."
+                }
+              ],
+              "payout_id": "po_09f0cbfdec4b9df4"
+            },
+            "tool": "support_evidence"
+          },
+          {
+            "abstained": false,
+            "arguments": {
+              "note_ids": [
+                "note_7d8a0548",
+                "note_58ee98c9"
+              ],
+              "trace": "TR140716"
+            },
+            "source_valid": true,
+            "tool": "submit_support_trace"
+          },
+          {
+            "accepted": true,
+            "result": {
+              "explanation": "The thread confirms that the overnight batch posted TR140716 for the storefront payout. The recovery batch TR279340 was considered but not used as the overnight run was successful. The reconciliation explicitly confirms the overnight run posted, assigning TR140716 to the storefront payout.",
+              "verdict": "confirmed"
+            },
+            "tool": "audit_support_trace"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "case_85399d1955230f35",
+      "scenario": "artifact_vs_credit",
+      "expected": {
+        "candidate_id": "bank_160c6d49595447b4",
+        "trace": "TR645689",
+        "required_notes": [
+          "note_8a01cd4c",
+          "note_b3e6d95f"
+        ]
+      },
+      "baseline": {
+        "finding": {
+          "reason": "request_bank_trace",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_001b2f93dcec4920",
+            "bank_160c6d49595447b4"
+          ],
+          "residual_cents": null,
+          "next_action": "Obtain a trace reference that identifies the bank credit."
+        },
+        "outcome": "rules",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "elapsed_seconds": 0.022,
+        "mode": "baseline",
+        "correct": false,
+        "steps": [
+          {
+            "result": {
+              "differences": [],
+              "merchant_complete": true,
+              "processor_complete": true,
+              "receipts": [],
+              "referenced_charges": []
+            },
+            "tool": "ledger_evidence"
+          },
+          {
+            "result": {
+              "bank_complete": true,
+              "candidates": [
+                {
+                  "cents": 509943,
+                  "id": "bank_001b2f93dcec4920",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR448720"
+                },
+                {
+                  "cents": 509943,
+                  "id": "bank_160c6d49595447b4",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR645689"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "payout_id": "po_b3e6d95f8a01cd4c",
+              "payout_trace": null,
+              "support_notes": [
+                {
+                  "id": "note_8a01cd4c",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "TR448720 is printed in the settlement ticket header. The receiving bank's incoming credit screen shows TR645689."
+                },
+                {
+                  "id": "note_b3e6d95f",
+                  "posted_at": "2026-01-15T20:01:00Z",
+                  "text": "Use the incoming credit screen value. The header number is just our internal ticket key."
+                }
+              ],
+              "watermark": "2026-01-16T00:00:00Z"
+            },
+            "tool": "bank_evidence"
+          }
+        ]
+      },
+      "live": {
+        "finding": {
+          "reason": "support_trace_proposal",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_160c6d49595447b4",
+            "note_8a01cd4c",
+            "note_b3e6d95f"
+          ],
+          "residual_cents": null,
+          "next_action": "Review the support notes and request a structured processor reference before reconciling.",
+          "proposal": {
+            "trace": "TR645689",
+            "candidate_id": "bank_160c6d49595447b4",
+            "citations": [
+              {
+                "note_id": "note_8a01cd4c",
+                "quote": "TR448720 is printed in the settlement ticket header. The receiving bank's incoming credit screen shows TR645689."
+              },
+              {
+                "note_id": "note_b3e6d95f",
+                "quote": "Use the incoming credit screen value. The header number is just our internal ticket key."
+              }
+            ]
+          }
+        },
+        "outcome": "grounded_proposal",
+        "input_tokens": 1265,
+        "output_tokens": 152,
+        "elapsed_seconds": 2.6137,
+        "mode": "live",
+        "correct": true,
+        "steps": [
+          {
+            "arguments": {
+              "case_id": "case_85399d1955230f35",
+              "cutoff": "2026-01-16T00:00:00Z"
+            },
+            "result": {
+              "candidates": [
+                {
+                  "cents": 509943,
+                  "id": "bank_001b2f93dcec4920",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR448720"
+                },
+                {
+                  "cents": 509943,
+                  "id": "bank_160c6d49595447b4",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR645689"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "notes": [
+                {
+                  "id": "note_8a01cd4c",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "TR448720 is printed in the settlement ticket header. The receiving bank's incoming credit screen shows TR645689."
+                },
+                {
+                  "id": "note_b3e6d95f",
+                  "posted_at": "2026-01-15T20:01:00Z",
+                  "text": "Use the incoming credit screen value. The header number is just our internal ticket key."
+                }
+              ],
+              "payout_id": "po_b3e6d95f8a01cd4c"
+            },
+            "tool": "support_evidence"
+          },
+          {
+            "abstained": false,
+            "arguments": {
+              "note_ids": [
+                "note_b3e6d95f"
+              ],
+              "trace": "TR645689"
+            },
+            "source_valid": true,
+            "tool": "submit_support_trace"
+          },
+          {
+            "accepted": true,
+            "result": {
+              "explanation": "The thread explicitly states that the incoming credit screen shows TR645689, and that the header number is internal. This directly assigns the proposed trace TR645689 to the payout.",
+              "verdict": "confirmed"
+            },
+            "tool": "audit_support_trace"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "case_b6a624f4b7b5f2bf",
+      "scenario": "other_merchant_same_amount",
+      "expected": {
+        "candidate_id": "bank_e52606591fc58d20",
+        "trace": "TR852479",
+        "required_notes": [
+          "note_284c4c14",
+          "note_a293268a"
+        ]
+      },
+      "baseline": {
+        "finding": {
+          "reason": "request_bank_trace",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_e52606591fc58d20",
+            "bank_e5f5a12980fadb65"
+          ],
+          "residual_cents": null,
+          "next_action": "Obtain a trace reference that identifies the bank credit."
+        },
+        "outcome": "rules",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "elapsed_seconds": 0.0225,
+        "mode": "baseline",
+        "correct": false,
+        "steps": [
+          {
+            "result": {
+              "differences": [],
+              "merchant_complete": true,
+              "processor_complete": true,
+              "receipts": [],
+              "referenced_charges": []
+            },
+            "tool": "ledger_evidence"
+          },
+          {
+            "result": {
+              "bank_complete": true,
+              "candidates": [
+                {
+                  "cents": 2950426,
+                  "id": "bank_e52606591fc58d20",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR852479"
+                },
+                {
+                  "cents": 2950426,
+                  "id": "bank_e5f5a12980fadb65",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR848130"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "payout_id": "po_a293268a284c4c14",
+              "payout_trace": null,
+              "support_notes": [
+                {
+                  "id": "note_284c4c14",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "We looked up the equal deposits. North kiosk received TR848130. The online store received TR852479."
+                },
+                {
+                  "id": "note_a293268a",
+                  "posted_at": "2026-01-15T20:01:00Z",
+                  "text": "The current discrepancy came from online checkout. The kiosk has a separate payout and case."
+                }
+              ],
+              "watermark": "2026-01-16T00:00:00Z"
+            },
+            "tool": "bank_evidence"
+          }
+        ]
+      },
+      "live": {
+        "finding": {
+          "reason": "request_bank_trace",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_e52606591fc58d20",
+            "bank_e5f5a12980fadb65"
+          ],
+          "residual_cents": null,
+          "next_action": "Obtain a trace reference that identifies the bank credit."
+        },
+        "outcome": "abstained",
+        "input_tokens": 1263,
+        "output_tokens": 209,
+        "elapsed_seconds": 3.4079,
+        "mode": "live",
+        "correct": false,
+        "steps": [
+          {
+            "arguments": {
+              "case_id": "case_b6a624f4b7b5f2bf",
+              "cutoff": "2026-01-16T00:00:00Z"
+            },
+            "result": {
+              "candidates": [
+                {
+                  "cents": 2950426,
+                  "id": "bank_e52606591fc58d20",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR852479"
+                },
+                {
+                  "cents": 2950426,
+                  "id": "bank_e5f5a12980fadb65",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR848130"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "notes": [
+                {
+                  "id": "note_284c4c14",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "We looked up the equal deposits. North kiosk received TR848130. The online store received TR852479."
+                },
+                {
+                  "id": "note_a293268a",
+                  "posted_at": "2026-01-15T20:01:00Z",
+                  "text": "The current discrepancy came from online checkout. The kiosk has a separate payout and case."
+                }
+              ],
+              "payout_id": "po_a293268a284c4c14"
+            },
+            "tool": "support_evidence"
+          },
+          {
+            "abstained": false,
+            "arguments": {
+              "note_ids": [
+                "note_284c4c14",
+                "note_a293268a"
+              ],
+              "trace": "TR852479"
+            },
+            "source_valid": true,
+            "tool": "submit_support_trace"
+          },
+          {
+            "accepted": false,
+            "result": {
+              "explanation": "The proposed trace 'TR852479' is explicitly assigned to the online store in the first note. The second note mentions a discrepancy from the online checkout and refers to a separate payout and case for the kiosk. However, it does not confirm or deny the trace 'TR852479' for the payout in question. The thread does not definitively assign the trace to the payout, leaving the connection ambiguous.",
+              "verdict": "insufficient"
+            },
+            "tool": "audit_support_trace"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "case_8bed7be07ba4df6d",
+      "scenario": "chronology_and_partial_retraction",
+      "expected": {
+        "candidate_id": "bank_7e871f8752557743",
+        "trace": "TR673143",
+        "required_notes": [
+          "note_fdd8ee32",
+          "note_ab44c953"
+        ]
+      },
+      "baseline": {
+        "finding": {
+          "reason": "request_bank_trace",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_3ba7715471e9abdc",
+            "bank_7e871f8752557743"
+          ],
+          "residual_cents": null,
+          "next_action": "Obtain a trace reference that identifies the bank credit."
+        },
+        "outcome": "rules",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "elapsed_seconds": 0.0228,
+        "mode": "baseline",
+        "correct": false,
+        "steps": [
+          {
+            "result": {
+              "differences": [],
+              "merchant_complete": true,
+              "processor_complete": true,
+              "receipts": [],
+              "referenced_charges": []
+            },
+            "tool": "ledger_evidence"
+          },
+          {
+            "result": {
+              "bank_complete": true,
+              "candidates": [
+                {
+                  "cents": 3026561,
+                  "id": "bank_3ba7715471e9abdc",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR606445"
+                },
+                {
+                  "cents": 3026561,
+                  "id": "bank_7e871f8752557743",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR673143"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "payout_id": "po_99b60897fdd8ee32",
+              "payout_trace": null,
+              "support_notes": [
+                {
+                  "id": "note_fdd8ee32",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "The holiday staging file used TR606445. The next business day's run used TR673143."
+                },
+                {
+                  "id": "note_99b60897",
+                  "posted_at": "2026-01-15T20:01:00Z",
+                  "text": "Earlier I said we'd need the holiday file because of the amount."
+                },
+                {
+                  "id": "note_ab44c953",
+                  "posted_at": "2026-01-15T20:02:00Z",
+                  "text": "Please retract my earlier note. The Friday amount was carried over and only the next business day's run posted."
+                }
+              ],
+              "watermark": "2026-01-16T00:00:00Z"
+            },
+            "tool": "bank_evidence"
+          }
+        ]
+      },
+      "live": {
+        "finding": {
+          "reason": "request_bank_trace",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_3ba7715471e9abdc",
+            "bank_7e871f8752557743"
+          ],
+          "residual_cents": null,
+          "next_action": "Obtain a trace reference that identifies the bank credit."
+        },
+        "outcome": "abstained",
+        "input_tokens": 1357,
+        "output_tokens": 222,
+        "elapsed_seconds": 3.5982,
+        "mode": "live",
+        "correct": false,
+        "steps": [
+          {
+            "arguments": {
+              "case_id": "case_8bed7be07ba4df6d",
+              "cutoff": "2026-01-16T00:00:00Z"
+            },
+            "result": {
+              "candidates": [
+                {
+                  "cents": 3026561,
+                  "id": "bank_3ba7715471e9abdc",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR606445"
+                },
+                {
+                  "cents": 3026561,
+                  "id": "bank_7e871f8752557743",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR673143"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "notes": [
+                {
+                  "id": "note_fdd8ee32",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "The holiday staging file used TR606445. The next business day's run used TR673143."
+                },
+                {
+                  "id": "note_99b60897",
+                  "posted_at": "2026-01-15T20:01:00Z",
+                  "text": "Earlier I said we'd need the holiday file because of the amount."
+                },
+                {
+                  "id": "note_ab44c953",
+                  "posted_at": "2026-01-15T20:02:00Z",
+                  "text": "Please retract my earlier note. The Friday amount was carried over and only the next business day's run posted."
+                }
+              ],
+              "payout_id": "po_99b60897fdd8ee32"
+            },
+            "tool": "support_evidence"
+          },
+          {
+            "abstained": false,
+            "arguments": {
+              "note_ids": [
+                "note_fdd8ee32",
+                "note_ab44c953"
+              ],
+              "trace": "TR673143"
+            },
+            "source_valid": true,
+            "tool": "submit_support_trace"
+          },
+          {
+            "accepted": false,
+            "result": {
+              "explanation": "The thread indicates that TR673143 was used for the next business day's run following the holiday staging file (TR606445). However, the final note retracts an earlier statement and clarifies that only the next business day's run posted, implying TR673143 was the correct trace. The notes do not explicitly confirm TR673143 as the trace for a payout, but they do assign it to the next business day's run, which may be the relevant context.",
+              "verdict": "insufficient"
+            },
+            "tool": "audit_support_trace"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "case_d57af0757713bf7f",
+      "scenario": "bank_choice_by_sequence",
+      "expected": {
+        "candidate_id": "bank_2420c4191fc49362",
+        "trace": "TR587739",
+        "required_notes": [
+          "note_ca1f6f9d",
+          "note_f3b5c9ed"
+        ]
+      },
+      "baseline": {
+        "finding": {
+          "reason": "request_bank_trace",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_2420c4191fc49362",
+            "bank_e321849d27dbeca6"
+          ],
+          "residual_cents": null,
+          "next_action": "Obtain a trace reference that identifies the bank credit."
+        },
+        "outcome": "rules",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "elapsed_seconds": 0.0224,
+        "mode": "baseline",
+        "correct": false,
+        "steps": [
+          {
+            "result": {
+              "differences": [],
+              "merchant_complete": true,
+              "processor_complete": true,
+              "receipts": [],
+              "referenced_charges": []
+            },
+            "tool": "ledger_evidence"
+          },
+          {
+            "result": {
+              "bank_complete": true,
+              "candidates": [
+                {
+                  "cents": 540248,
+                  "id": "bank_2420c4191fc49362",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR587739"
+                },
+                {
+                  "cents": 540248,
+                  "id": "bank_e321849d27dbeca6",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR974415"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "payout_id": "po_f3b5c9edca1f6f9d",
+              "payout_trace": null,
+              "support_notes": [
+                {
+                  "id": "note_ca1f6f9d",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "In the bank's listing, the credits appear as TR587739 followed by TR974415. The list has two rows."
+                },
+                {
+                  "id": "note_f3b5c9ed",
+                  "posted_at": "2026-01-15T20:01:00Z",
+                  "text": "The latter was our sponsor bank test. The former was the merchant payout this case is about."
+                }
+              ],
+              "watermark": "2026-01-16T00:00:00Z"
+            },
+            "tool": "bank_evidence"
+          }
+        ]
+      },
+      "live": {
+        "finding": {
+          "reason": "support_trace_proposal",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_2420c4191fc49362",
+            "note_ca1f6f9d",
+            "note_f3b5c9ed"
+          ],
+          "residual_cents": null,
+          "next_action": "Review the support notes and request a structured processor reference before reconciling.",
+          "proposal": {
+            "trace": "TR587739",
+            "candidate_id": "bank_2420c4191fc49362",
+            "citations": [
+              {
+                "note_id": "note_ca1f6f9d",
+                "quote": "In the bank's listing, the credits appear as TR587739 followed by TR974415. The list has two rows."
+              },
+              {
+                "note_id": "note_f3b5c9ed",
+                "quote": "The latter was our sponsor bank test. The former was the merchant payout this case is about."
+              }
+            ]
+          }
+        },
+        "outcome": "grounded_proposal",
+        "input_tokens": 1256,
+        "output_tokens": 169,
+        "elapsed_seconds": 2.8486,
+        "mode": "live",
+        "correct": true,
+        "steps": [
+          {
+            "arguments": {
+              "case_id": "case_d57af0757713bf7f",
+              "cutoff": "2026-01-16T00:00:00Z"
+            },
+            "result": {
+              "candidates": [
+                {
+                  "cents": 540248,
+                  "id": "bank_2420c4191fc49362",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR587739"
+                },
+                {
+                  "cents": 540248,
+                  "id": "bank_e321849d27dbeca6",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR974415"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "notes": [
+                {
+                  "id": "note_ca1f6f9d",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "In the bank's listing, the credits appear as TR587739 followed by TR974415. The list has two rows."
+                },
+                {
+                  "id": "note_f3b5c9ed",
+                  "posted_at": "2026-01-15T20:01:00Z",
+                  "text": "The latter was our sponsor bank test. The former was the merchant payout this case is about."
+                }
+              ],
+              "payout_id": "po_f3b5c9edca1f6f9d"
+            },
+            "tool": "support_evidence"
+          },
+          {
+            "abstained": false,
+            "arguments": {
+              "note_ids": [
+                "note_ca1f6f9d",
+                "note_f3b5c9ed"
+              ],
+              "trace": "TR587739"
+            },
+            "source_valid": true,
+            "tool": "submit_support_trace"
+          },
+          {
+            "accepted": true,
+            "result": {
+              "explanation": "The thread explicitly identifies TR587739 as the merchant payout this case is about, while TR974415 is noted as a sponsor bank test. This directly assigns the proposed trace TR587739 to the payout in question.",
+              "verdict": "confirmed"
+            },
+            "tool": "audit_support_trace"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "case_884fc6108591d394",
+      "scenario": "negated_matching_reference",
+      "expected": {
+        "candidate_id": "bank_913f11a8f2f7e7cc",
+        "trace": "TR658332",
+        "required_notes": [
+          "note_40cf265f"
+        ]
+      },
+      "baseline": {
+        "finding": {
+          "reason": "request_bank_trace",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_913f11a8f2f7e7cc",
+            "bank_d3a0e0746a2fc659"
+          ],
+          "residual_cents": null,
+          "next_action": "Obtain a trace reference that identifies the bank credit."
+        },
+        "outcome": "rules",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "elapsed_seconds": 0.0227,
+        "mode": "baseline",
+        "correct": false,
+        "steps": [
+          {
+            "result": {
+              "differences": [],
+              "merchant_complete": true,
+              "processor_complete": true,
+              "receipts": [],
+              "referenced_charges": []
+            },
+            "tool": "ledger_evidence"
+          },
+          {
+            "result": {
+              "bank_complete": true,
+              "candidates": [
+                {
+                  "cents": 2497017,
+                  "id": "bank_d3a0e0746a2fc659",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR647101"
+                },
+                {
+                  "cents": 2497017,
+                  "id": "bank_913f11a8f2f7e7cc",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR658332"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "payout_id": "po_8566dc4140cf265f",
+              "payout_trace": null,
+              "support_notes": [
+                {
+                  "id": "note_40cf265f",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "The alert mentioned TR647101 because the two credits have equal amounts, but Treasury tied that number to its prefunding move. We received this merchant disbursement under TR658332."
+                }
+              ],
+              "watermark": "2026-01-16T00:00:00Z"
+            },
+            "tool": "bank_evidence"
+          }
+        ]
+      },
+      "live": {
+        "finding": {
+          "reason": "support_trace_proposal",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_913f11a8f2f7e7cc",
+            "note_40cf265f"
+          ],
+          "residual_cents": null,
+          "next_action": "Review the support notes and request a structured processor reference before reconciling.",
+          "proposal": {
+            "trace": "TR658332",
+            "candidate_id": "bank_913f11a8f2f7e7cc",
+            "citations": [
+              {
+                "note_id": "note_40cf265f",
+                "quote": "The alert mentioned TR647101 because the two credits have equal amounts, but Treasury tied that number to its prefunding move. We received this merchant disbursement under TR658332."
+              }
+            ]
+          }
+        },
+        "outcome": "grounded_proposal",
+        "input_tokens": 1177,
+        "output_tokens": 155,
+        "elapsed_seconds": 2.6347,
+        "mode": "live",
+        "correct": true,
+        "steps": [
+          {
+            "arguments": {
+              "case_id": "case_884fc6108591d394",
+              "cutoff": "2026-01-16T00:00:00Z"
+            },
+            "result": {
+              "candidates": [
+                {
+                  "cents": 2497017,
+                  "id": "bank_d3a0e0746a2fc659",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR647101"
+                },
+                {
+                  "cents": 2497017,
+                  "id": "bank_913f11a8f2f7e7cc",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR658332"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "notes": [
+                {
+                  "id": "note_40cf265f",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "The alert mentioned TR647101 because the two credits have equal amounts, but Treasury tied that number to its prefunding move. We received this merchant disbursement under TR658332."
+                }
+              ],
+              "payout_id": "po_8566dc4140cf265f"
+            },
+            "tool": "support_evidence"
+          },
+          {
+            "abstained": false,
+            "arguments": {
+              "note_ids": [
+                "note_40cf265f"
+              ],
+              "trace": "TR658332"
+            },
+            "source_valid": true,
+            "tool": "submit_support_trace"
+          },
+          {
+            "accepted": true,
+            "result": {
+              "explanation": "The thread explicitly assigns the proposed trace 'TR658332' to the payout by stating, 'We received this merchant disbursement under TR658332.' This directly links the trace to the payout.",
+              "verdict": "confirmed"
+            },
+            "tool": "audit_support_trace"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "case_9611c3f84a5482e9",
+      "scenario": "canonical_confirmed",
+      "expected": {
+        "candidate_id": "bank_b0e13fdc62768973",
+        "trace": "TR404456",
+        "required_notes": [
+          "note_e770baa2"
+        ]
+      },
+      "baseline": {
+        "finding": {
+          "reason": "support_trace_proposal",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_b0e13fdc62768973",
+            "note_e770baa2"
+          ],
+          "residual_cents": null,
+          "next_action": "Review the support notes and request a structured processor reference before reconciling.",
+          "proposal": {
+            "trace": "TR404456",
+            "candidate_id": "bank_b0e13fdc62768973",
+            "citations": [
+              {
+                "note_id": "note_e770baa2",
+                "quote": "Treasury verified the payout. Verified settlement reference: TR404456."
+              }
+            ]
+          }
+        },
+        "outcome": "rules",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "elapsed_seconds": 0.0227,
+        "mode": "baseline",
+        "correct": true,
+        "steps": [
+          {
+            "result": {
+              "differences": [],
+              "merchant_complete": true,
+              "processor_complete": true,
+              "receipts": [],
+              "referenced_charges": []
+            },
+            "tool": "ledger_evidence"
+          },
+          {
+            "result": {
+              "bank_complete": true,
+              "candidates": [
+                {
+                  "cents": 1896261,
+                  "id": "bank_b0e13fdc62768973",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR404456"
+                },
+                {
+                  "cents": 1896261,
+                  "id": "bank_daef9dfc9582cadf",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR714684"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "payout_id": "po_49fd81fce770baa2",
+              "payout_trace": null,
+              "support_notes": [
+                {
+                  "id": "note_e770baa2",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "Treasury verified the payout. Verified settlement reference: TR404456."
+                }
+              ],
+              "watermark": "2026-01-16T00:00:00Z"
+            },
+            "tool": "bank_evidence"
+          }
+        ]
+      },
+      "live": {
+        "finding": {
+          "reason": "support_trace_proposal",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_b0e13fdc62768973",
+            "note_e770baa2"
+          ],
+          "residual_cents": null,
+          "next_action": "Review the support notes and request a structured processor reference before reconciling.",
+          "proposal": {
+            "trace": "TR404456",
+            "candidate_id": "bank_b0e13fdc62768973",
+            "citations": [
+              {
+                "note_id": "note_e770baa2",
+                "quote": "Treasury verified the payout. Verified settlement reference: TR404456."
+              }
+            ]
+          }
+        },
+        "outcome": "grounded_proposal",
+        "input_tokens": 1118,
+        "output_tokens": 142,
+        "elapsed_seconds": 2.4432,
+        "mode": "live",
+        "correct": true,
+        "steps": [
+          {
+            "arguments": {
+              "case_id": "case_9611c3f84a5482e9",
+              "cutoff": "2026-01-16T00:00:00Z"
+            },
+            "result": {
+              "candidates": [
+                {
+                  "cents": 1896261,
+                  "id": "bank_b0e13fdc62768973",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR404456"
+                },
+                {
+                  "cents": 1896261,
+                  "id": "bank_daef9dfc9582cadf",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR714684"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "notes": [
+                {
+                  "id": "note_e770baa2",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "Treasury verified the payout. Verified settlement reference: TR404456."
+                }
+              ],
+              "payout_id": "po_49fd81fce770baa2"
+            },
+            "tool": "support_evidence"
+          },
+          {
+            "abstained": false,
+            "arguments": {
+              "note_ids": [
+                "note_e770baa2"
+              ],
+              "trace": "TR404456"
+            },
+            "source_valid": true,
+            "tool": "submit_support_trace"
+          },
+          {
+            "accepted": true,
+            "result": {
+              "explanation": "The thread contains a direct confirmation that the Treasury verified the payout using the settlement reference TR404456. This explicitly assigns the proposed trace to the payout.",
+              "verdict": "confirmed"
+            },
+            "tool": "audit_support_trace"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "case_1d610361bdfa8489",
+      "scenario": "canonical_final",
+      "expected": {
+        "candidate_id": "bank_03630fcb0a1f739b",
+        "trace": "TR220336",
+        "required_notes": [
+          "note_d7e771de"
+        ]
+      },
+      "baseline": {
+        "finding": {
+          "reason": "support_trace_proposal",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_03630fcb0a1f739b",
+            "note_d7e771de"
+          ],
+          "residual_cents": null,
+          "next_action": "Review the support notes and request a structured processor reference before reconciling.",
+          "proposal": {
+            "trace": "TR220336",
+            "candidate_id": "bank_03630fcb0a1f739b",
+            "citations": [
+              {
+                "note_id": "note_d7e771de",
+                "quote": "Confirmed trace is TR220336. Bank operations checked the posting for this payout."
+              }
+            ]
+          }
+        },
+        "outcome": "rules",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "elapsed_seconds": 0.0217,
+        "mode": "baseline",
+        "correct": true,
+        "steps": [
+          {
+            "result": {
+              "differences": [],
+              "merchant_complete": true,
+              "processor_complete": true,
+              "receipts": [],
+              "referenced_charges": []
+            },
+            "tool": "ledger_evidence"
+          },
+          {
+            "result": {
+              "bank_complete": true,
+              "candidates": [
+                {
+                  "cents": 1601667,
+                  "id": "bank_11e6160cdebc95c1",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR878152"
+                },
+                {
+                  "cents": 1601667,
+                  "id": "bank_03630fcb0a1f739b",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR220336"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "payout_id": "po_b0d876e7d7e771de",
+              "payout_trace": null,
+              "support_notes": [
+                {
+                  "id": "note_d7e771de",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "Confirmed trace is TR220336. Bank operations checked the posting for this payout."
+                }
+              ],
+              "watermark": "2026-01-16T00:00:00Z"
+            },
+            "tool": "bank_evidence"
+          }
+        ]
+      },
+      "live": {
+        "finding": {
+          "reason": "support_trace_proposal",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_03630fcb0a1f739b",
+            "note_d7e771de"
+          ],
+          "residual_cents": null,
+          "next_action": "Review the support notes and request a structured processor reference before reconciling.",
+          "proposal": {
+            "trace": "TR220336",
+            "candidate_id": "bank_03630fcb0a1f739b",
+            "citations": [
+              {
+                "note_id": "note_d7e771de",
+                "quote": "Confirmed trace is TR220336. Bank operations checked the posting for this payout."
+              }
+            ]
+          }
+        },
+        "outcome": "grounded_proposal",
+        "input_tokens": 1124,
+        "output_tokens": 160,
+        "elapsed_seconds": 2.6439,
+        "mode": "live",
+        "correct": true,
+        "steps": [
+          {
+            "arguments": {
+              "case_id": "case_1d610361bdfa8489",
+              "cutoff": "2026-01-16T00:00:00Z"
+            },
+            "result": {
+              "candidates": [
+                {
+                  "cents": 1601667,
+                  "id": "bank_11e6160cdebc95c1",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR878152"
+                },
+                {
+                  "cents": 1601667,
+                  "id": "bank_03630fcb0a1f739b",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR220336"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "notes": [
+                {
+                  "id": "note_d7e771de",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "Confirmed trace is TR220336. Bank operations checked the posting for this payout."
+                }
+              ],
+              "payout_id": "po_b0d876e7d7e771de"
+            },
+            "tool": "support_evidence"
+          },
+          {
+            "abstained": false,
+            "arguments": {
+              "note_ids": [
+                "note_d7e771de"
+              ],
+              "trace": "TR220336"
+            },
+            "source_valid": true,
+            "tool": "submit_support_trace"
+          },
+          {
+            "accepted": true,
+            "result": {
+              "explanation": "The thread contains a note that explicitly confirms the trace is TR220336. The note states, 'Confirmed trace is TR220336. Bank operations checked the posting for this payout.' This directly assigns the proposed trace to the payout.",
+              "verdict": "confirmed"
+            },
+            "tool": "audit_support_trace"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "case_bf622ec728a86524",
+      "scenario": "only_pending",
+      "expected": {
+        "candidate_id": null,
+        "trace": null,
+        "required_notes": []
+      },
+      "baseline": {
+        "finding": {
+          "reason": "request_bank_trace",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_b689d0793a6cd84b",
+            "bank_d84dd8d44cdeeb8c"
+          ],
+          "residual_cents": null,
+          "next_action": "Obtain a trace reference that identifies the bank credit."
+        },
+        "outcome": "rules",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "elapsed_seconds": 0.0256,
+        "mode": "baseline",
+        "correct": true,
+        "steps": [
+          {
+            "result": {
+              "differences": [],
+              "merchant_complete": true,
+              "processor_complete": true,
+              "receipts": [],
+              "referenced_charges": []
+            },
+            "tool": "ledger_evidence"
+          },
+          {
+            "result": {
+              "bank_complete": true,
+              "candidates": [
+                {
+                  "cents": 3140770,
+                  "id": "bank_b689d0793a6cd84b",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR266534"
+                },
+                {
+                  "cents": 3140770,
+                  "id": "bank_d84dd8d44cdeeb8c",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR883906"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "payout_id": "po_e34a6466f847ef78",
+              "payout_trace": null,
+              "support_notes": [
+                {
+                  "id": "note_f847ef78",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "Candidates from the bank are TR266534 and TR883906. Neither has been linked to this payout yet."
+                },
+                {
+                  "id": "note_e34a6466",
+                  "posted_at": "2026-01-15T20:01:00Z",
+                  "text": "Could someone in Treasury check whether one of these credits is ours?"
+                }
+              ],
+              "watermark": "2026-01-16T00:00:00Z"
+            },
+            "tool": "bank_evidence"
+          }
+        ]
+      },
+      "live": {
+        "finding": {
+          "reason": "request_bank_trace",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_b689d0793a6cd84b",
+            "bank_d84dd8d44cdeeb8c"
+          ],
+          "residual_cents": null,
+          "next_action": "Obtain a trace reference that identifies the bank credit."
+        },
+        "outcome": "abstained",
+        "input_tokens": 1245,
+        "output_tokens": 176,
+        "elapsed_seconds": 2.9283,
+        "mode": "live",
+        "correct": true,
+        "steps": [
+          {
+            "arguments": {
+              "case_id": "case_bf622ec728a86524",
+              "cutoff": "2026-01-16T00:00:00Z"
+            },
+            "result": {
+              "candidates": [
+                {
+                  "cents": 3140770,
+                  "id": "bank_b689d0793a6cd84b",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR266534"
+                },
+                {
+                  "cents": 3140770,
+                  "id": "bank_d84dd8d44cdeeb8c",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR883906"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "notes": [
+                {
+                  "id": "note_f847ef78",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "Candidates from the bank are TR266534 and TR883906. Neither has been linked to this payout yet."
+                },
+                {
+                  "id": "note_e34a6466",
+                  "posted_at": "2026-01-15T20:01:00Z",
+                  "text": "Could someone in Treasury check whether one of these credits is ours?"
+                }
+              ],
+              "payout_id": "po_e34a6466f847ef78"
+            },
+            "tool": "support_evidence"
+          },
+          {
+            "abstained": false,
+            "arguments": {
+              "note_ids": [
+                "note_f847ef78"
+              ],
+              "trace": "TR266534"
+            },
+            "source_valid": true,
+            "tool": "submit_support_trace"
+          },
+          {
+            "accepted": false,
+            "result": {
+              "explanation": "The thread mentions two candidates, TR266534 and TR883906, and states that neither has been linked to this payout. It also raises a question about verifying if one of these credits belongs to the payout, but no definitive confirmation is provided. The notes do not assign the proposed trace to this payout.",
+              "verdict": "insufficient"
+            },
+            "tool": "audit_support_trace"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "case_6addad55fe3ec051",
+      "scenario": "only_exclusions",
+      "expected": {
+        "candidate_id": null,
+        "trace": null,
+        "required_notes": []
+      },
+      "baseline": {
+        "finding": {
+          "reason": "request_bank_trace",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_77f4d3c04594cfab",
+            "bank_d0eb6866fe09dd90"
+          ],
+          "residual_cents": null,
+          "next_action": "Obtain a trace reference that identifies the bank credit."
+        },
+        "outcome": "rules",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "elapsed_seconds": 0.0231,
+        "mode": "baseline",
+        "correct": true,
+        "steps": [
+          {
+            "result": {
+              "differences": [],
+              "merchant_complete": true,
+              "processor_complete": true,
+              "receipts": [],
+              "referenced_charges": []
+            },
+            "tool": "ledger_evidence"
+          },
+          {
+            "result": {
+              "bank_complete": true,
+              "candidates": [
+                {
+                  "cents": 1926523,
+                  "id": "bank_d0eb6866fe09dd90",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR537722"
+                },
+                {
+                  "cents": 1926523,
+                  "id": "bank_77f4d3c04594cfab",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR381428"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "payout_id": "po_44b5464ae3c0e4ab",
+              "payout_trace": null,
+              "support_notes": [
+                {
+                  "id": "note_9c0aeda7",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "Reserve sweep is TR537722; the test deposit is TR381428. Both are separate from this merchant's payout."
+                },
+                {
+                  "id": "note_40e627b7",
+                  "posted_at": "2026-01-15T20:01:00Z",
+                  "text": "The receiving bank has not supplied a reference for the merchant payout."
+                }
+              ],
+              "watermark": "2026-01-16T00:00:00Z"
+            },
+            "tool": "bank_evidence"
+          }
+        ]
+      },
+      "live": {
+        "finding": {
+          "reason": "request_bank_trace",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_77f4d3c04594cfab",
+            "bank_d0eb6866fe09dd90"
+          ],
+          "residual_cents": null,
+          "next_action": "Obtain a trace reference that identifies the bank credit."
+        },
+        "outcome": "abstained",
+        "input_tokens": 1242,
+        "output_tokens": 191,
+        "elapsed_seconds": 3.1345,
+        "mode": "live",
+        "correct": true,
+        "steps": [
+          {
+            "arguments": {
+              "case_id": "case_6addad55fe3ec051",
+              "cutoff": "2026-01-16T00:00:00Z"
+            },
+            "result": {
+              "candidates": [
+                {
+                  "cents": 1926523,
+                  "id": "bank_d0eb6866fe09dd90",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR537722"
+                },
+                {
+                  "cents": 1926523,
+                  "id": "bank_77f4d3c04594cfab",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR381428"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "notes": [
+                {
+                  "id": "note_9c0aeda7",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "Reserve sweep is TR537722; the test deposit is TR381428. Both are separate from this merchant's payout."
+                },
+                {
+                  "id": "note_40e627b7",
+                  "posted_at": "2026-01-15T20:01:00Z",
+                  "text": "The receiving bank has not supplied a reference for the merchant payout."
+                }
+              ],
+              "payout_id": "po_44b5464ae3c0e4ab"
+            },
+            "tool": "support_evidence"
+          },
+          {
+            "abstained": false,
+            "arguments": {
+              "note_ids": [
+                "note_9c0aeda7"
+              ],
+              "trace": "TR537722"
+            },
+            "source_valid": true,
+            "tool": "submit_support_trace"
+          },
+          {
+            "accepted": false,
+            "result": {
+              "explanation": "The proposed trace 'TR537722' is explicitly mentioned in the first note as the 'Reserve sweep', which is clearly stated to be separate from the merchant's payout. There is no direct assignment of 'TR537722' to the merchant's payout. The second note only mentions that the receiving bank has not supplied a reference, but it does not confirm or deny the trace for the payout.",
+              "verdict": "insufficient"
+            },
+            "tool": "audit_support_trace"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "case_5d7127792cd2f557",
+      "scenario": "confirmation_not_yet_visible",
+      "expected": {
+        "candidate_id": null,
+        "trace": null,
+        "required_notes": []
+      },
+      "baseline": {
+        "finding": {
+          "reason": "request_bank_trace",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_370ce4d7b8b4b0c4",
+            "bank_e32842720618992d"
+          ],
+          "residual_cents": null,
+          "next_action": "Obtain a trace reference that identifies the bank credit."
+        },
+        "outcome": "rules",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "elapsed_seconds": 0.0222,
+        "mode": "baseline",
+        "correct": true,
+        "steps": [
+          {
+            "result": {
+              "differences": [],
+              "merchant_complete": true,
+              "processor_complete": true,
+              "receipts": [],
+              "referenced_charges": []
+            },
+            "tool": "ledger_evidence"
+          },
+          {
+            "result": {
+              "bank_complete": true,
+              "candidates": [
+                {
+                  "cents": 4463817,
+                  "id": "bank_e32842720618992d",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR283599"
+                },
+                {
+                  "cents": 4463817,
+                  "id": "bank_370ce4d7b8b4b0c4",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR482738"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "payout_id": "po_98b35b166d71e1c9",
+              "payout_trace": null,
+              "support_notes": [
+                {
+                  "id": "note_6d71e1c9",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "Two unconfirmed options TR283599 and TR482738. Please investigate which one cleared for this payout."
+                }
+              ],
+              "watermark": "2026-01-16T00:00:00Z"
+            },
+            "tool": "bank_evidence"
+          }
+        ]
+      },
+      "live": {
+        "finding": {
+          "reason": "request_bank_trace",
+          "comparison": "bank",
+          "cents": null,
+          "evidence_ids": [
+            "bank_370ce4d7b8b4b0c4",
+            "bank_e32842720618992d"
+          ],
+          "residual_cents": null,
+          "next_action": "Obtain a trace reference that identifies the bank credit."
+        },
+        "outcome": "abstained",
+        "input_tokens": 1152,
+        "output_tokens": 177,
+        "elapsed_seconds": 2.937,
+        "mode": "live",
+        "correct": true,
+        "steps": [
+          {
+            "arguments": {
+              "case_id": "case_5d7127792cd2f557",
+              "cutoff": "2026-01-16T00:00:00Z"
+            },
+            "result": {
+              "candidates": [
+                {
+                  "cents": 4463817,
+                  "id": "bank_e32842720618992d",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR283599"
+                },
+                {
+                  "cents": 4463817,
+                  "id": "bank_370ce4d7b8b4b0c4",
+                  "posted_at": "2026-01-16T00:00:00Z",
+                  "trace": "TR482738"
+                }
+              ],
+              "claimed_elsewhere": [],
+              "notes": [
+                {
+                  "id": "note_6d71e1c9",
+                  "posted_at": "2026-01-15T20:00:00Z",
+                  "text": "Two unconfirmed options TR283599 and TR482738. Please investigate which one cleared for this payout."
+                }
+              ],
+              "payout_id": "po_98b35b166d71e1c9"
+            },
+            "tool": "support_evidence"
+          },
+          {
+            "abstained": false,
+            "arguments": {
+              "note_ids": [
+                "note_6d71e1c9"
+              ],
+              "trace": "TR283599"
+            },
+            "source_valid": true,
+            "tool": "submit_support_trace"
+          },
+          {
+            "accepted": false,
+            "result": {
+              "explanation": "The thread only presents two unconfirmed options (TR283599 and TR482738) and asks to investigate which one cleared for the payout. There is no explicit confirmation or assignment of TR283599 to the payout. The note does not provide sufficient evidence to confirm the trace.",
+              "verdict": "insufficient"
+            },
+            "tool": "audit_support_trace"
+          }
+        ]
+      }
+    }
+  ]
+}
